@@ -13,18 +13,27 @@
 # limitations under the License.
 
 {
-  'includes': [
-    'examples/examples.gypi',
-  ],
   'targets': [
     {
-      'target_name': 'bacardi',
-      'dependencies': [
-        'examples/examples.gypi:examples',
+      'target_name': 'generator',
+      'type': 'none',
+      'actions': [
+        {
+          'action_name': 'tsc',
+          'inputs': [
+            'main.ts',
+          ],
+          'outputs': [
+            '<@(PRODUCT_DIR)/generator'
+          ],
+          'action': [
+            '<@(PRODUCT_DIR)/../../bootstrap/command/tsc',
+            '<@(_inputs)',
+            '--outDir',
+            '<@(_outputs)',
+          ],
+        },
       ],
-      'sources': [
-        '
-      ]
     },
   ],
 }
